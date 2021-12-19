@@ -1,0 +1,6 @@
+CREATE DATABASE knowledge; 
+\c knowledge
+
+\dt
+
+SELECT * FROM knex_migrations;
