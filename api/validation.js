@@ -1,4 +1,4 @@
-module.exports = app =>{
+module.exports = app => {
     function existsOrError(value, msg) {
         if(!value) throw msg
         if(Array.isArray(value) && value.length === 0) throw msg
