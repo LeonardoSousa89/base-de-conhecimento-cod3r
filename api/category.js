@@ -1,5 +1,5 @@
 module.exports = app => {
-    const { existsOrError, notExixtsOrError } = app.api.validation
+    const { existsOrError, notExistsOrError } = app.api.validation
 
     const save = (req, res) => {
         const category = { ...req.body }
@@ -31,15 +31,15 @@ module.exports = app => {
 
             const subcategory = await app.db('categories')
                 .where({ parentId: req.params.id })
-            notExixtsOrError(subcategory, 'Categoria possui subcategorias.')
+            notExistsOrError(subcategory, 'Categoria possui subcategorias.')
 
             const articles = await app.db('articles')
               .where({ categoryId: req.params.id })
-            notExixtsOrError(articles, 'Categoria possui artigos.')
+            notExistsOrError(articles, 'Categoria possui artigos.')
 
            const rowsDeleted = await app.db('categoris')
                .where({ categoryId: req.params.id }).del()
-           notExixtsOrError(rowsDeleted, 'Categoria não foi encontrada.')
+           notExistsOrError(rowsDeleted, 'Categoria não foi encontrada.')
 
            res.status(204).send()
         }catch(msg){
