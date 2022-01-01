@@ -29,7 +29,7 @@ module.exports = app => {
         }
 
         user.password = encryptPassword(user.password)
-        delete user.password
+        delete user.confirmPassword
 
         if(user.id){
             app.db('users')
