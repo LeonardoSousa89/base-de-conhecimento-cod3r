@@ -42,5 +42,7 @@ module.exports = app => {
         }
     }
 
-    const limit = 10
+    const limit = 10 //paginação
+
+    //fiquei na aula 624 - pausa para treinar validação
 }
