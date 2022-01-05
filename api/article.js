@@ -1,10 +1,9 @@
 module.exports = app => {
-    const { existsOrError, notExistsOrError } = app.api.validation
+    const { existsOrError } = app.api.validation
 
     const save = (req, res) => {
         const article = {...req.body}
         if(req.params.id) article.id = req.params.id
-
 
         try{
             existsOrError(article.name, 'Nome não informado')
@@ -13,7 +12,7 @@ module.exports = app => {
             existsOrError(article.userId, 'Autor não informado')
             existsOrError(article.content, 'Conteúdo não informado')
         }catch(msg){
-            res.status(400).send(msg)
+           return res.status(400).send(msg)
         }
 
         if(article.id) {
@@ -22,7 +21,7 @@ module.exports = app => {
                .where({ id: article.id })
                .then(_ => res.status(204).send())
                .catch(err => res.status(500).send(err))
-        }else {
+        }else{
             app.db('articles')
                .insert(article)
                .then(_ => res.status(204).send())
@@ -39,10 +38,9 @@ module.exports = app => {
             }catch(msg){
                 return res.status(400).send(msg)
             }
-
-            res.status(204).send()
+            return res.status(204).send()
         }catch(msg){
-            res.status(500).send(msg)
+            return  res.status(500).send(msg)
         }
     }
 
@@ -60,7 +58,7 @@ module.exports = app => {
            .catch(err => res.status(500).send(err))
     }
 
-    const getById = async (req, res) => {
+    const getById = (req, res) => {
         app.db('articles')
            .where({ id: req.params.id })
            .first()
