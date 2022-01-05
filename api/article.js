@@ -77,5 +77,8 @@ module.exports = app => {
     
         Error [ERR_HTTP_HEADERS_SENT] 
         Cannot set headers after they are sent to the client 
+
+        resolvi inserindo return em todos os res.status().send() 
+        inseridos nos blocos try e sem os mesmos.
  * 
  */
